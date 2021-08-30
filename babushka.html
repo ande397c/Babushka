@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="babushka.css" />
+    <title>Babushka</title>
+  </head>
+  <body>
+    <style></style>
+
+    <nav>
+      <button data-kategori="alle" class="valgt">Alle</button>
+      <button data-kategori="forretter">Forretter</button>
+      <button data-kategori="hovedretter">Hovedretter</button>
+      <button data-kategori="desserter">Desserter</button>
+      <button data-kategori="drikkevarer">Drikkevarer</button>
+    </nav>
+
+    <h1>Alle retter</h1>
+
+    <section></section>
+
+    <template>
+      <article>
+        <h2></h2>
+        <img src="" alt="" />
+        <p class="kortbeskrivelse">Kort beskrivelse:</p>
+        <p class="oprindelsesregion">oprindelsesregion:</p>
+        <p class="kategori">kategori:</p>
+        <p class="pris">Pris:</p>
+      </article>
+    </template>
+
+    <script>
+      let alleRetter;
+      let container;
+      let temp;
+      let filter = "alle";
+      const overskrift = document.querySelector("h1");
+
+      const url = "https://babushka-dd8a.restdb.io/rest/menu";
+
+      const options = {
+        headers: {
+          "x-apikey": "600ec2fb1346a1524ff12de4",
+        },
+      };
+
+      document.addEventListener("DOMContentLoaded", start);
+
+      function start() {
+        container = document.querySelector("section");
+        temp = document.querySelector("template");
+        const filterKnapper = document.querySelectorAll("nav button");
+        filterKnapper.forEach((knap) =>
+          knap.addEventListener("click", filtrerRetter)
+        );
+
+        hentdata();
+      }
+
+      function filtrerRetter() {
+        filter = this.dataset.kategori;
+        document.querySelector(".valgt").classList.remove("valgt");
+        this.classList.add("valgt");
+        overskrift.textContent = this.textContent;
+
+        visMenu();
+      }
+
+      async function hentdata() {
+        const response = await fetch(url, options);
+        alleRetter = await response.json();
+        // console.log(alleRetter);
+        visMenu();
+      }
+
+      function visMenu() {
+        container.textContent = "";
+
+        alleRetter.forEach((enRet) => {
+          // console.log("kategori", enRet.kategori);
+
+          if (filter == enRet.kategori || filter == "alle") {
+            let klon = temp.cloneNode(true).content;
+
+            klon.querySelector("h2").textContent = enRet.navn;
+            klon.querySelector(".kortbeskrivelse").textContent =
+              enRet.kortbeskrivelse;
+            klon.querySelector(".oprindelsesregion").textContent +=
+              " " + enRet.oprindelsesregion;
+
+            klon.querySelector(".kategori").textContent += " " + enRet.kategori;
+
+            klon.querySelector(".pris").textContent += " " + enRet.pris;
+
+            klon.querySelector("img").src = +"billeder/" + enRet.billede;
+
+            container.appendChild(klon);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

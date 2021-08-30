@@ -8,8 +8,7 @@
     <title>Babushka</title>
   </head>
   <body>
-    <style></style>
-
+    <h1>Velkommen til Bistro Babushka</h1>
     <nav>
       <button data-kategori="alle" class="valgt">Alle</button>
       <button data-kategori="forretter">Forretter</button>
@@ -18,7 +17,7 @@
       <button data-kategori="drikkevarer">Drikkevarer</button>
     </nav>
 
-    <h1>Alle retter</h1>
+    <h2 id="menuOverskrift">Alle retter</h2>
 
     <section></section>
 
@@ -26,9 +25,7 @@
       <article>
         <h2></h2>
         <img src="" alt="" />
-        <p class="kortbeskrivelse">Kort beskrivelse:</p>
-        <p class="oprindelsesregion">Oprindelsesregion:</p>
-        <p class="kategori">Kategori:</p>
+        <p class="kortbeskrivelse"></p>
         <p class="pris">Pris:</p>
       </article>
     </template>
@@ -38,7 +35,7 @@
       let container;
       let temp;
       let filter = "alle";
-      const overskrift = document.querySelector("h1");
+      const overskrift = document.querySelector("#menuOverskrift");
 
       const url = "https://babushka-dd8a.restdb.io/rest/menu";
 
@@ -89,12 +86,7 @@
             klon.querySelector("h2").textContent = enRet.navn;
             klon.querySelector(".kortbeskrivelse").textContent =
               enRet.kortbeskrivelse;
-            klon.querySelector(".oprindelsesregion").textContent +=
-              " " + enRet.oprindelsesregion;
-
-            klon.querySelector(".kategori").textContent += " " + enRet.kategori;
-
-            klon.querySelector(".pris").textContent += " " + enRet.pris;
+            klon.querySelector(".pris").textContent += " " + enRet.pris + "kr.";
 
             klon.querySelector("img").src =
               "billeder/" + enRet.billednavn + "-md.jpg";

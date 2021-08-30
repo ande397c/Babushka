@@ -27,8 +27,8 @@
         <h2></h2>
         <img src="" alt="" />
         <p class="kortbeskrivelse">Kort beskrivelse:</p>
-        <p class="oprindelsesregion">oprindelsesregion:</p>
-        <p class="kategori">kategori:</p>
+        <p class="oprindelsesregion">Oprindelsesregion:</p>
+        <p class="kategori">Kategori:</p>
         <p class="pris">Pris:</p>
       </article>
     </template>
@@ -73,7 +73,7 @@
       async function hentdata() {
         const response = await fetch(url, options);
         alleRetter = await response.json();
-        // console.log(alleRetter);
+        console.log(alleRetter);
         visMenu();
       }
 
@@ -96,7 +96,8 @@
 
             klon.querySelector(".pris").textContent += " " + enRet.pris;
 
-            klon.querySelector("img").src = +"billeder/" + enRet.billede;
+            klon.querySelector("img").src =
+              "billeder/" + enRet.billednavn + "-md.jpg";
 
             container.appendChild(klon);
           }

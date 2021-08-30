@@ -91,9 +91,17 @@
             klon.querySelector("img").src =
               "billeder/" + enRet.billednavn + "-md.jpg";
 
+            klon
+              .querySelector("article")
+              .addEventListener("click", () => visDetaljer(enRet));
+
             container.appendChild(klon);
           }
         });
+      }
+
+      function visDetaljer(retten) {
+        location.href = `02_detalje.html?id=${retten._id}`;
       }
     </script>
   </body>

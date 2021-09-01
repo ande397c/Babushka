@@ -8,13 +8,18 @@
     <title>Babushka</title>
   </head>
   <body>
-    <h1>Velkommen til Bistro Babushka</h1>
+    <div class="background">
+      <h1>Velkommen til</h1>
+      <h2>Bistro Babushka</h2>
+
+      <h3>Oplev en spændende verden af russisk mad og drikke</h3>
+    </div>
     <nav>
       <button data-kategori="alle" class="valgt">Alle</button>
       <button data-kategori="forretter">Forretter</button>
       <button data-kategori="hovedretter">Hovedretter</button>
       <button data-kategori="desserter">Desserter</button>
-      <button data-kategori="drikkevarer">Drikkevarer</button>
+      <button id="knap_bund" data-kategori="drikkevarer">Drikkevarer</button>
     </nav>
 
     <h2 id="menuOverskrift">Alle retter</h2>
@@ -104,5 +109,20 @@
       //   location.href = `babushkaDetalje.html?id=${retten._id}`;
       // }
     </script>
+
+    <footer>
+      <article class="kontakt">
+        <div class="adresse">
+          <h3>Adresse:</h3>
+          <p>Grønnegade 97</p>
+          <p>1234 København K</p>
+        </div>
+        <div class="tider">
+          <h3>Åbningstider:</h3>
+          <p>Mandag-fredag 10:30 - 22:00</p>
+          <p>Lørdag 12:00 - 23:00</p>
+        </div>
+      </article>
+    </footer>
   </body>
 </html>

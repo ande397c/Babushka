@@ -97,8 +97,8 @@ nav .valgt {
 #burger_knap {
   position: absolute;
   display: none;
-  top: 96.5rem;
-  right: 3rem;
+  top: 62.5rem;
+  right: 1rem;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;

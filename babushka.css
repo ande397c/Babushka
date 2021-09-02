@@ -1,6 +1,12 @@
 /* Til detalje side */
+
 #single {
   background-color: white;
+}
+
+#detaljer {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 #single hr {
@@ -77,13 +83,69 @@ nav .valgt {
   scale: 1.35;
 }
 
-/* Til hovedside */
+/*  Hovedside */
+
+.burger div {
+  width: 100%;
+  height: 5px;
+  background-color: white;
+  margin: 10px 0;
+  transition: 0.4s;
+  border-radius: 10px;
+}
+
+#burger_knap {
+  position: absolute;
+  display: none;
+  top: 96.5rem;
+  right: 3rem;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 3em;
+  animation-duration: all 0.5s;
+  animation-timing-function: cubic-bezier(1, 0, 0, 1);
+  animation-iteration-count: 1;
+}
+
+#burger_knap {
+  display: flex;
+}
+
+.ryk {
+  transform: translateX(-30px);
+}
+
+.fra_siden {
+  animation-name: fra_siden_kf;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(1, 0, 0, 1);
+}
+
+@keyframes fra_siden_kf {
+  from {
+    transform: translateX(-70vw);
+  }
+
+  to {
+    transform: translateX(0vw);
+  }
+}
 
 article {
-  /* border: 1px solid #333; */
   padding: 10px;
   margin: 1em;
   background-color: #8f969c;
+  cursor: pointer;
+}
+
+article:hover {
+  opacity: 0.5;
+}
+
+#single:hover {
+  opacity: 1;
+  cursor: default;
 }
 
 .background {
@@ -123,7 +185,7 @@ nav {
   justify-content: center;
   gap: 4rem;
   overflow-x: auto;
-  padding-top: 2em;
+  margin-top: 3em;
 }
 
 body {
@@ -138,8 +200,25 @@ body {
   color: white;
 }
 
+.skjult {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+h1 {
+  font-family: "Alegreya Sans", sans-serif;
+}
+
+h2 {
+  font-family: "Russo One", sans-serif;
+}
+
 h3 {
   font-size: 1.8em;
+  font-family: "Alegreya Sans", sans-serif;
 }
 
 p {
@@ -147,6 +226,7 @@ p {
   line-height: 26px;
   margin-bottom: 5px;
   font-weight: 350;
+  font-family: "Alegreya Sans", sans-serif;
 }
 
 footer,
@@ -181,57 +261,17 @@ footer .kontakt p:hover {
   opacity: 1;
 }
 
-@media (max-width: 300px) {
-  .background h1 {
-    padding-left: 2em;
-    font-size: 1.8em;
-    color: white;
-    grid-row: 3;
-    grid-column: 1/6;
-  }
-
-  .background h2 {
-    font-size: 2em;
-    padding-left: 2em;
-    line-height: 3rem;
-    grid-column: 1/6;
-    grid-row: 5;
-    color: white;
-  }
-
-  .background h3 {
-    padding-left: 2em;
-    font-size: 1.8em;
-    line-height: 2rem;
-    color: white;
-    grid-row: 7;
-    grid-column: 1/8;
-  }
-
-  .background p {
-    font-size: 1.2em;
-  }
-
-  footer .kontakt .adresse h3 {
-    font-size: 1.8em;
-  }
-
-  footer .kontakt .tider h3 {
-    font-size: 1.8em;
-  }
-}
-
 @media (min-width: 300px) {
   .background h1 {
     padding-left: 2em;
-    font-size: 2.5em;
+    font-size: 3em;
     color: white;
     grid-row: 4;
     grid-column: 1/6;
   }
 
   .background h2 {
-    font-size: 3em;
+    font-size: 3.5em;
     padding-left: 2em;
     line-height: 3rem;
     grid-column: 1/6;
@@ -241,7 +281,7 @@ footer .kontakt p:hover {
 
   .background h3 {
     padding-left: 2em;
-    font-size: 1.8em;
+    font-size: 2em;
     line-height: 2.7rem;
     color: white;
     grid-row: 7;
@@ -251,29 +291,57 @@ footer .kontakt p:hover {
   button {
     font-size: 1.3em;
   }
-}
 
-@media (max-width: 760px) {
-  nav {
+  .singleView {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .background h1 {
+    padding-left: 1em;
+    font-size: 2.3em;
+    color: white;
+    grid-row: 3;
+    grid-column: 1/6;
   }
 
-  button {
-    width: 40%;
-    display: block;
-    margin: -20px -110px;
-    margin-bottom: -20px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    margin-bottom: 2em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-top: 10px;
+  .background h2 {
+    font-size: 3em;
+    padding-left: 1em;
+    line-height: 3rem;
+    grid-column: 1/6;
+    grid-row: 5;
+    color: white;
+  }
+
+  .background h3 {
+    padding-left: 2em;
+    font-size: 1.8em;
+    line-height: 3rem;
+    color: white;
+    grid-row: 7;
+    grid-column: 1/8;
+  }
+
+  .background p {
+    font-size: 1.2em;
+  }
+  #menuOverskrift {
+    margin-top: 2em;
+  }
+
+  footer .kontakt .adresse h3 {
+    font-size: 1.8em;
+  }
+
+  footer .kontakt .tider h3 {
+    font-size: 1.8em;
+  }
+
+  footer {
+    height: 0vh;
   }
 }
 
@@ -316,9 +384,19 @@ footer .kontakt p:hover {
   .background p {
     font-size: 1.3rem;
   }
+
+  footer .kontakt {
+    padding-top: 7%;
+  }
 }
 
-@media (min-width: 1000px) {
+@media (max-width: 830px) {
+  #tilbage_knap {
+    display: flex;
+  }
+}
+
+@media (min-width: 800px) {
   .background h1 {
     padding-left: 2em;
     font-size: 3.8rem;
@@ -346,12 +424,52 @@ footer .kontakt p:hover {
     grid-column: 2/6;
     line-height: 2.5rem;
   }
+  .singleView {
+    display: block;
+  }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1300px) {
+  .singleView {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1500px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+  }
+
+  button {
+    width: 25%;
+    display: block;
+    margin: -20px -110px;
+    margin-bottom: -20px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-bottom: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 10px;
+  }
+
+  #tilbage_knap {
+    display: block;
+    margin-left: -10em;
+    margin-top: 3em;
+  }
+}
+
+@media (min-width: 1500px) {
   .background h1 {
     padding-left: 2em;
-    font-size: 4.4rem;
+    font-size: 4.7rem;
     text-transform: uppercase;
     color: white;
     grid-row: 3;
@@ -361,7 +479,7 @@ footer .kontakt p:hover {
 
   .background h2 {
     padding-left: 2em;
-    font-size: 5rem;
+    font-size: 5.3rem;
     color: white;
     grid-row: 5;
     grid-column: 2/6;
@@ -374,7 +492,7 @@ footer .kontakt p:hover {
     color: white;
     grid-row: 7;
     grid-column: 2/6;
-    line-height: 2.5rem;
+    line-height: 3.5rem;
   }
 
   #menuOverskrift {
@@ -386,6 +504,18 @@ footer .kontakt p:hover {
   }
 
   #single p {
-    font-size: 2em;
+    font-size: 2.2em;
+    line-height: 3.2rem;
+  }
+
+  footer {
+    height: 40vh;
+  }
+
+  footer p {
+    font-size: 2rem;
+  }
+  footer h2 {
+    font-size: 3rem;
   }
 }

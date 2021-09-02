@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="babushka.css" />
     <title>Babushka</title>
   </head>
@@ -14,7 +20,15 @@
 
       <h3>Oplev en spændende verden af russisk mad og drikke</h3>
     </div>
-    <nav>
+
+    <div id="burger_knap">
+      <div class="burger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <nav class="fra_siden">
       <button data-kategori="alle" class="valgt">Alle</button>
       <button data-kategori="forretter">Forretter</button>
       <button data-kategori="hovedretter">Hovedretter</button>
@@ -22,96 +36,105 @@
       <button id="knap_bund" data-kategori="drikkevarer">Drikkevarer</button>
     </nav>
 
-    <h2 id="menuOverskrift">Alle retter</h2>
+    <main>
+      <h2 id="menuOverskrift">Alle retter</h2>
 
-    <section></section>
+      <section></section>
 
-    <template>
-      <article>
-        <h2></h2>
-        <img src="" alt="" />
-        <p class="kortbeskrivelse"></p>
-        <p class="pris">Pris:</p>
-      </article>
-    </template>
+      <template>
+        <article>
+          <h2></h2>
+          <img src="" alt="" />
+          <p class="kortbeskrivelse"></p>
+          <p class="pris">Pris:</p>
+        </article>
+      </template>
 
-    <script>
-      let alleRetter;
-      let container;
-      let temp;
-      let filter = "alle";
-      const overskrift = document.querySelector("#menuOverskrift");
+      <script>
+        let alleRetter;
+        let container;
+        let temp;
+        let filter = "alle";
+        const overskrift = document.querySelector("#menuOverskrift");
+        const knap = document.querySelector("#burger_knap");
+        const links = document.querySelector("nav");
 
-      const url = "https://babushka-dd8a.restdb.io/rest/menu";
+        const url = "https://babushka-dd8a.restdb.io/rest/menu";
 
-      const options = {
-        headers: {
-          "x-apikey": "600ec2fb1346a1524ff12de4",
-        },
-      };
+        const options = {
+          headers: {
+            "x-apikey": "600ec2fb1346a1524ff12de4",
+          },
+        };
 
-      document.addEventListener("DOMContentLoaded", start);
+        document.addEventListener("DOMContentLoaded", start);
 
-      function start() {
-        container = document.querySelector("section");
-        temp = document.querySelector("template");
-        const filterKnapper = document.querySelectorAll("nav button");
-        filterKnapper.forEach((knap) =>
-          knap.addEventListener("click", filtrerRetter)
-        );
+        function start() {
+          knap.addEventListener("click", toggleMenu);
 
-        hentdata();
-      }
+          container = document.querySelector("section");
+          temp = document.querySelector("template");
+          const filterKnapper = document.querySelectorAll("nav button");
+          filterKnapper.forEach((knap) =>
+            knap.addEventListener("click", filtrerRetter)
+          );
 
-      function filtrerRetter() {
-        filter = this.dataset.kategori;
-        document.querySelector(".valgt").classList.remove("valgt");
-        this.classList.add("valgt");
-        overskrift.textContent = this.textContent;
+          hentdata();
+        }
 
-        visMenu();
-      }
+        function toggleMenu() {
+          console.log("toggleMenu");
+          links.classList.toggle("hidden");
+          knap.classList.toggle("ryk");
+        }
 
-      async function hentdata() {
-        const response = await fetch(url, options);
-        alleRetter = await response.json();
-        console.log(alleRetter);
-        visMenu();
-      }
+        function filtrerRetter() {
+          filter = this.dataset.kategori;
+          document.querySelector(".valgt").classList.remove("valgt");
+          this.classList.add("valgt");
+          overskrift.textContent = this.textContent;
 
-      function visMenu() {
-        container.textContent = "";
+          visMenu();
+        }
 
-        alleRetter.forEach((enRet) => {
-          // console.log("kategori", enRet.kategori);
+        async function hentdata() {
+          const response = await fetch(url, options);
+          alleRetter = await response.json();
+          console.log(alleRetter);
+          visMenu();
+        }
 
-          if (filter == enRet.kategori || filter == "alle") {
-            let klon = temp.cloneNode(true).content;
+        function visMenu() {
+          container.textContent = "";
 
-            klon.querySelector("h2").textContent = enRet.navn;
-            klon.querySelector(".kortbeskrivelse").textContent =
-              enRet.kortbeskrivelse;
-            klon.querySelector(".pris").textContent += " " + enRet.pris + "kr.";
+          alleRetter.forEach((enRet) => {
+            // console.log("kategori", enRet.kategori);
 
-            klon.querySelector("img").src =
-              "billeder/" + enRet.billednavn + "-md.jpg";
+            if (filter == enRet.kategori || filter == "alle") {
+              let klon = temp.cloneNode(true).content;
 
-            klon.querySelector("article").addEventListener("click", () => {
-              location.href = "babushkaDetalje.html?id=" + enRet._id;
-            });
+              klon.querySelector("h2").textContent = enRet.navn;
+              klon.querySelector(".kortbeskrivelse").textContent =
+                enRet.kortbeskrivelse;
+              klon.querySelector(".pris").textContent +=
+                " " + enRet.pris + "kr.";
 
-            container.appendChild(klon);
-          }
-        });
-      }
+              klon.querySelector("img").src =
+                "billeder/" + enRet.billednavn + "-md.jpg";
 
-      // function visDetaljer(retten) {
-      //   location.href = `babushkaDetalje.html?id=${retten._id}`;
-      // }
-    </script>
+              klon.querySelector("article").addEventListener("click", () => {
+                location.href = "babushkaDetalje.html?id=" + enRet._id;
+              });
+
+              container.appendChild(klon);
+            }
+          });
+        }
+      </script>
+    </main>
 
     <footer>
-      <article class="kontakt">
+      <div class="kontakt">
         <div class="adresse">
           <h3>Adresse:</h3>
           <p>Grønnegade 97</p>
@@ -122,7 +145,7 @@
           <p>Mandag-fredag 10:30 - 22:00</p>
           <p>Lørdag 12:00 - 23:00</p>
         </div>
-      </article>
+      </div>
     </footer>
   </body>
 </html>
